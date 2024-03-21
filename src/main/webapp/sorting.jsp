@@ -58,16 +58,31 @@
 <jsp:include page="/header.jsp"/>
 <div class="main">
     <h1>Search Result</h1>
-    <%
 
+    <%
         List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
         if (patients.size() > 1) {%> <!-- always contains column names -->
+    <p>Which field do you want to sort (ascending)?</p>
+    <form method="POST" action="/sorttable.html">
+        <select name="field">
+            <option value="" disabled selected>Select field</option>
+            <% for (String col:patients.getFirst()){%>
+            <option value=<%=col%>><%= col %></option>
+            <%}%>
+        </select>
+        <select name="order">
+            <option value="" disabled selected>Select ordering</option>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <input type="submit" value="Sort">
+    </form>
     <table>
         <thead>
         <tr>
-            <%for (String col : patients.get(0)) {%>
-            <th><%=col%></th>
-            <%}%>
+                <%for (String col : patients.get(0)) {%>
+                <td><%=col%></td>
+                <%}%>
         </tr>
         </thead>
         <tbody>

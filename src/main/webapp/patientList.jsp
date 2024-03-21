@@ -12,12 +12,12 @@
   <h2>Patients:</h2>
   <ul>
     <%
-      List<String> patients = (List<String>) request.getAttribute("patientNames");
-      for (String patient : patients)
+      List<String> patients = (List<String>) request.getAttribute("patientIDs");
+      for (String id : patients)
       {
-        String href = "dummypage.html";
+        String href = "/runadvancedsearch.html?keyword="+id+"category=ID";
     %>
-    <li><a href="<%=href%>"><%=patient%></a>
+    <li><a href="<%=href%>"><%=id%></a>
     </li>
     <% } %>
   </ul>

@@ -17,11 +17,10 @@ public class ModelFactory
   {
     if (model == null)
     {
-      model = new Model();
+      model = new Model("data/patients100.csv");
       // Note where the data file is stored in the data directory,
       // and the pathname to locate it.
       // The data should be read the file once, not every time the model is accessed!
-      model.readFile("data/patients100.csv");
     }
     return model;
   }
