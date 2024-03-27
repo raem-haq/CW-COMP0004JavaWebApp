@@ -27,4 +27,4 @@ Some exception handling has also been implemented, such as the handling of a Fil
 
 ## GitHub
 
-[see project on github](https://github.com/raem-haq/CW-COMP0004JavaWebApp/blob/master/README.md)
+[see project on github](https://github.com/raem-haq/CW-COMP0004JavaWebApp)
