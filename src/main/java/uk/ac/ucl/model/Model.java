@@ -1,7 +1,7 @@
 package uk.ac.ucl.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 
 public class Model
 {
@@ -12,9 +12,6 @@ public class Model
     dataFrame = dataLoader.load();
   }
 
-  // The example code in this class should be replaced by your Model class code.
-  // The data should be stored in a suitable data structure.
-
   public List<String> getColumnNames(){ return  dataFrame.getColumnNames();}
 
   // was getPatientNames
@@ -23,11 +20,20 @@ public class Model
     return dataFrame.getColumn("ID").getRows();
   }
 
-  // This also returns dummy data. The real version should use the keyword parameter to search
-  // the data and return a list of matching items.
-  public List<List<String>> basicSearchFor(String keyword)
+  // find multiple keywords
+  // to avoid duplicate records a set is used
+  public Set<List<String>> basicSearchFor(String[] keywords)
   {
-    return dataFrame.basicSearchFor(keyword);
+    Set<List<String>> returnSet = new HashSet<>();
+    for (String word : keywords){
+      returnSet.addAll(dataFrame.basicSearchFor(word));
+    }
+
+    return returnSet;
+  }
+
+  public List<String> getRow(Integer i){
+    return dataFrame.getRecord(i);
   }
 
   public List<List<String>> advancedSearchFor(String keyword, String field)
@@ -43,11 +49,24 @@ public class Model
   }
 
   public List<List<String>> getTable() {
+    HashMap<String, List<String>> all = new HashMap<>(dataFrame.getAll());
+    List<String> headers = new ArrayList<>(all.keySet());
     List<List<String>> table = new ArrayList<>();
-    table.add(getColumnNames());
-    table.addAll(dataFrame.getAll());
+    table.add(headers);
+    for (int i = 0; i < dataFrame.getRowCount(); i++){
+      List<String> row = new ArrayList<>();
+      for (String field : headers){
+        row.add(all.get(field).get(i));
+      }
+      table.add(row);
+    }
     return table;
   }
+
+  public String addRow(HashMap<String,String> record) {return dataFrame.addRow(record);}
+
+  public void deleteRow(Integer index) {dataFrame.deleteRow(index);}
+  public String modifyRow(Integer index, HashMap<String,String> record) {return dataFrame.modifyRow(index, record);}
 
   public void sort(String field, Boolean asc) { dataFrame.sortBy(field, asc);}
 }

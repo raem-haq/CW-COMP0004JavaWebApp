@@ -56,40 +56,27 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-    <h1>Sorting</h1>
+    <h1>Modify row</h1>
 
     <%
-        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
-        if (patients.size() > 1) {%> <!-- always contains column names -->
-    <p>Which field do you want to sort (ascending)?</p>
-    <!-- drop-down menus to select field and ordering -->
-    <form method="POST" action="/sorttable.html"> <!-- eventually return here -->
-        <select name="field">
-            <option value="" disabled selected>Select field</option>
-            <% for (String col:patients.getFirst()){%>
-            <option value=<%=col%>><%= col %></option>
-            <%}%>
-        </select>
-        <select name="order">
-            <option value="" disabled selected>Select ordering</option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <input type="submit" value="Sort">
-    </form>
+        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");%> <!-- always contains column names -->
+    <p>Which row do you want to modify?</p>
+    <!-- first stage in modifying -->
 
-    <!-- sorted table is displayed -->
     <table>
         <thead>
         <tr>
-                <%for (String col : patients.get(0)) {%>
-                <td><%=col%></td>
-                <%}%>
+            <td>Index</td>
+            <%for (String col : patients.get(0)) {%>
+            <td><%=col%></td>
+            <%}%>
         </tr>
         </thead>
         <tbody>
-        <%for (int i = 1; i < patients.size(); i++) {%>
+        <%for (int i = 1; i < patients.size(); i++) {
+        String href = "/getrow.html?index="+String.valueOf(i);%> <!-- each index redirects to the getRow servlet -->
         <tr>
+            <td><a href=<%=href%>><%=i%></a></td>
             <%for (String value : patients.get(i)) {%>
             <td><%=value%></td>
             <%}%>
@@ -97,9 +84,6 @@
         <%}%>
         </tbody>
     </table>
-    <%} else {%>
-    <p>No results found</p>
-    <%}%>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

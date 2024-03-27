@@ -13,21 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-// The servlet invoked to display a list of patients. Note that this data is just example data,
-// you replace it with your data.
-// The url http://localhost:8080/patientList.html is mapped to calling doGet on the servlet object.
-// The servlet object is created automatically, you just provide the class.
+// The servlet invoked to display a list of patients. As IDs are unique, they are displayed.
 @WebServlet("/patientList.html")
 public class ViewPatientListServlet extends HttpServlet
 {
 
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
   {
-    // Get the data from the model
     Model model = ModelFactory.getModel();
     List<String> patientIDs = model.getPatientIDs();
-    // Then add the data to the request object that will be sent to the Java Server Page, so that
-    // the JSP can access the data (a Java data structure).
     request.setAttribute("patientIDs", patientIDs);
 
     // Invoke the JSP.

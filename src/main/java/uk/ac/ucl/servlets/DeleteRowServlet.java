@@ -12,21 +12,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-// The servlet invoked to sort a table.
-@WebServlet("/sorttable.html")
-public class SortTableServlet extends HttpServlet
+// The servlet invoked to delete a row
+@WebServlet("/rundeleterow.html")
+public class DeleteRowServlet extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Model model = ModelFactory.getModel();
-
-        model.sort(request.getParameter("field"), request.getParameter("order").equals("asc"));
-        request.setAttribute("result", model.getTable());
+        String message;
+        try {
+            int index = Integer.parseInt(request.getParameter("index")) - 1;//convert string to int
+            model.deleteRow(index); // should always work
+            message = "Deleted row successfully";
+        } catch (NumberFormatException e){
+            message = "Request index cannot be converted to Integer"; // should never happen
+        }
+        request.setAttribute("message", message);
 
         // Invoke the JSP page.
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/sorting.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/edited.jsp");
         dispatch.forward(request, response);
     }
 }

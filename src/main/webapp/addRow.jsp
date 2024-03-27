@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -7,7 +6,6 @@
     <jsp:include page="/meta.jsp"/>
     <title>Patient Data App</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -57,32 +55,17 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-    <h1>Search Result</h1>
-    <!-- shows all matching records -->
-    <%
-        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
-        if (patients.size() > 1) {%> <!-- always contains column names -->
-    <table>
-        <thead>
-        <tr>
-            <%for (String col : patients.get(0)) {%>
-            <th><%=col%></th>
-            <%}%>
-        </tr>
-        </thead>
-        <tbody>
-        <%for (int i = 1; i < patients.size(); i++) {%>
-        <tr>
-            <%for (String value : patients.get(i)) {%>
-            <td><%=value%></td>
-            <%}%>
-        </tr>
+    <h1>Add a row</h1>
+    <% List<String> columnNames = (List<String>) request.getAttribute("result");%>
+    <p>Enter dates in the form YYYY-MM-DD</p> <!--I planned a full list of how to format different field
+    but ran out of time -->
+    <form method="POST" action="/runaddrow.html">
+        <% for (String field : columnNames){%>
+        <input type="text" name=<%=field%> placeholder=<%=field%> /> <!-- add data for each field
+        may be left blank except for ID-->
         <%}%>
-        </tbody>
-    </table>
-    <%} else {%>
-    <p>No results found</p>
-    <%}%>
+        <input type="submit" value="Add" />
+    </form>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

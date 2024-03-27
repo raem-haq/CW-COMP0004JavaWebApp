@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -7,7 +6,6 @@
     <jsp:include page="/meta.jsp"/>
     <title>Patient Data App</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -57,32 +55,9 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-    <h1>Search Result</h1>
-    <!-- shows all matching records -->
-    <%
-        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
-        if (patients.size() > 1) {%> <!-- always contains column names -->
-    <table>
-        <thead>
-        <tr>
-            <%for (String col : patients.get(0)) {%>
-            <th><%=col%></th>
-            <%}%>
-        </tr>
-        </thead>
-        <tbody>
-        <%for (int i = 1; i < patients.size(); i++) {%>
-        <tr>
-            <%for (String value : patients.get(i)) {%>
-            <td><%=value%></td>
-            <%}%>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
-    <%} else {%>
-    <p>No results found</p>
-    <%}%>
+    <!-- delete, modify, add, all redirect here -->
+    <% String message = (String) request.getAttribute("message");%>
+    <h1> <%=message%> </h1>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

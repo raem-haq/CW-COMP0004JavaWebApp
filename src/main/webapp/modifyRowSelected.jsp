@@ -59,47 +59,38 @@
     <h1>Sorting</h1>
 
     <%
-        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
-        if (patients.size() > 1) {%> <!-- always contains column names -->
-    <p>Which field do you want to sort (ascending)?</p>
-    <!-- drop-down menus to select field and ordering -->
-    <form method="POST" action="/sorttable.html"> <!-- eventually return here -->
-        <select name="field">
-            <option value="" disabled selected>Select field</option>
-            <% for (String col:patients.getFirst()){%>
-            <option value=<%=col%>><%= col %></option>
-            <%}%>
-        </select>
-        <select name="order">
-            <option value="" disabled selected>Select ordering</option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <input type="submit" value="Sort">
-    </form>
-
-    <!-- sorted table is displayed -->
+        List<String> record = (List<String>) request.getAttribute("record");
+        int index = Integer.parseInt(request.getParameter("index"));
+        List<String> columnNames = (List<String>) request.getAttribute("columnNames");%>
+    <p>How do you want to modify this row?</p>
+    <!-- third and second-to-last step in modifying -->
     <table>
         <thead>
         <tr>
-                <%for (String col : patients.get(0)) {%>
-                <td><%=col%></td>
-                <%}%>
+            <%for (String col : columnNames) {%>
+            <td><%=col%></td>
+            <%}%>
         </tr>
         </thead>
         <tbody>
-        <%for (int i = 1; i < patients.size(); i++) {%>
         <tr>
-            <%for (String value : patients.get(i)) {%>
+            <%for (String value : record) {%>
             <td><%=value%></td>
             <%}%>
         </tr>
-        <%}%>
         </tbody>
     </table>
-    <%} else {%>
-    <p>No results found</p>
-    <%}%>
+
+    <form method="POST" action="/runmodifyrow.html">
+        <select name="index">
+            <option value=<%=index%> selected><%=index%></option>
+        </select>
+        <%for (int i = 0; i < columnNames.size(); i++){%>
+        <!-- default values are the current contents of this record -->
+        <input type="text" name="<%=columnNames.get(i)%>" value="<%=record.get(i)%>"  />
+        <%}%>
+        <input type="submit" value="Modify" />
+    </form>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

@@ -56,40 +56,35 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-    <h1>Sorting</h1>
+    <h1>Delete row</h1>
 
     <%
-        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
-        if (patients.size() > 1) {%> <!-- always contains column names -->
-    <p>Which field do you want to sort (ascending)?</p>
-    <!-- drop-down menus to select field and ordering -->
-    <form method="POST" action="/sorttable.html"> <!-- eventually return here -->
-        <select name="field">
-            <option value="" disabled selected>Select field</option>
-            <% for (String col:patients.getFirst()){%>
-            <option value=<%=col%>><%= col %></option>
+        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");%> <!-- always contains column names -->
+    <p>Which row do you want to delete?</p>
+    <form method="POST" action="/rundeleterow.html">
+        <select name="index">
+            <option value="" disabled selected>Select index</option>
+            <% for (int i = 1; i<= patients.size(); i++){%>
+            <option value=<%=i%>><%=i%></option>
             <%}%>
         </select>
-        <select name="order">
-            <option value="" disabled selected>Select ordering</option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <input type="submit" value="Sort">
+        <input type="submit" value="Delete"/>
     </form>
 
-    <!-- sorted table is displayed -->
+    <!-- table is displayed for reference, so the user knows the records each index corresponds to -->
     <table>
         <thead>
         <tr>
-                <%for (String col : patients.get(0)) {%>
-                <td><%=col%></td>
-                <%}%>
+            <td>Index</td>
+            <%for (String col : patients.get(0)) {%>
+            <td><%=col%></td>
+            <%}%>
         </tr>
         </thead>
         <tbody>
         <%for (int i = 1; i < patients.size(); i++) {%>
         <tr>
+            <td><%=i%></td>
             <%for (String value : patients.get(i)) {%>
             <td><%=value%></td>
             <%}%>
@@ -97,9 +92,6 @@
         <%}%>
         </tbody>
     </table>
-    <%} else {%>
-    <p>No results found</p>
-    <%}%>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

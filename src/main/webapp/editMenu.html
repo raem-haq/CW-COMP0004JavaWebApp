@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color: #ffffff; padding: 20px;">
+    <h2>Welcome to the Patient Data App</h2>
+
+    <nav>
+        <ul>
+            <li>
+                <button onclick="location.href='colnames.html?nextpage=addRow.jsp'">Add a record</button>
+            </li>
+            <li>
+                <button onclick="location.href='table.html?nextpage=deleteRow.jsp'">Delete a record</button>
+            </li>
+
+            <li>
+                <button onclick="location.href='table.html?nextpage=modifyRowChoose.jsp'">Modify a record</button>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

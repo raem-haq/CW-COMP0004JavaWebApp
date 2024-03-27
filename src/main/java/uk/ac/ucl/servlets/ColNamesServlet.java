@@ -28,9 +28,9 @@ public class ColNamesServlet extends HttpServlet
         List<String> searchResult = new ArrayList<>(model.getColumnNames());
         request.setAttribute("result", searchResult);
 
-        // Invoke the JSP page.
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/advancedSearch.jsp");
+        // Many pages require the column name. Hence, the nextpage variable.
+        RequestDispatcher dispatch = context.getRequestDispatcher("/"+request.getParameter("nextpage"));
         dispatch.forward(request, response);
     }
 }

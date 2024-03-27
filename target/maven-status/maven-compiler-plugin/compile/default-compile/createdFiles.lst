@@ -7,7 +7,11 @@ uk\ac\ucl\servlets\ColNamesServlet.class
 uk\ac\ucl\servlets\TableServlet.class
 uk\ac\ucl\model\DataFrame.class
 uk\ac\ucl\model\Model.class
+uk\ac\ucl\servlets\GetRowServlet.class
+uk\ac\ucl\servlets\AddRowServlet.class
 uk\ac\ucl\servlets\SortTableServlet.class
+uk\ac\ucl\servlets\DeleteRowServlet.class
+uk\ac\ucl\servlets\ModifyRowServlet.class
 uk\ac\ucl\servlets\SearchServlet.class
 uk\ac\ucl\model\Column.class
 uk\ac\ucl\servlets\ViewPatientListServlet.class

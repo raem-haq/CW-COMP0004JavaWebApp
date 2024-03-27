@@ -24,9 +24,8 @@ public class DataLoader {
     }
 
     public DataFrame load(){
-        try {
-            Reader in = new FileReader(filePath);
-            CSVParser parser = new CSVParser(in, CSVFormat.DEFAULT.withFirstRecordAsHeader());
+        try (Reader in = new FileReader(filePath);
+            CSVParser parser = new CSVParser(in, CSVFormat.DEFAULT.withFirstRecordAsHeader())){
             Iterable<CSVRecord> records = parser.getRecords();
 
             int numColumns = parser.getHeaderMap().size();
@@ -43,7 +42,7 @@ public class DataLoader {
             }
             return dataFrame;
         } catch (IOException e) {
-            return new DataFrame();
+            return new DataFrame(); //no data is read
         }
     }
 

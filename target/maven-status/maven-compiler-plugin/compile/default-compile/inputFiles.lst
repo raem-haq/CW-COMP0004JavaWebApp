@@ -1,6 +1,7 @@
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\SearchServlet.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\AdvancedSearchServlet.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\ViewPatientListServlet.java
+C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\DeleteRowServlet.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\TableServlet.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\main\Main.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\model\ColTuple.java
@@ -10,4 +11,7 @@ C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\a
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\SortTableServlet.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\model\Column.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\model\DataFrame.java
+C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\AddRowServlet.java
+C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\ModifyRowServlet.java
 C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\model\DataLoader.java
+C:\Users\raemh\Documents\Java Exercises\CW-COMP0004JavaWebApp\src\main\java\uk\ac\ucl\servlets\GetRowServlet.java

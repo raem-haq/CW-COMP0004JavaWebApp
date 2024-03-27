@@ -11,16 +11,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0; /* Light grey background color */
+            background-color: #f0f0f0;
         }
 
         .main {
-            background-color: #ffffff; /* White background color */
+            background-color: #ffffff;
             padding: 20px;
-            margin: 50px auto; /* Centering the content */
-            width: 300px; /* Adjust width as needed */
+            margin: 50px auto;
+            width: 300px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding a shadow effect */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
@@ -44,7 +44,7 @@
         input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #007bff; /* Blue background color */
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
@@ -53,18 +53,19 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3; /* Darker blue background color on hover */
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 <div class="main">
     <h1>Advanced Search</h1>
-    <form method="POST" action="/runadvancedsearch.html">
+    <!-- comma separated search does not make sense here -->
+    <form method="GET" action="/runadvancedsearch.html">
         <input type="text" name="keyword" placeholder="Enter search keyword here"/>
         <br>
         <%List<String> patients = (List<String>) request.getAttribute("result");%>
-        <select name="category">
+        <select name="category"> <!-- drop-down menu of all the fields-->
             <option value="" disabled selected>Select category</option>
             <% for (String col:patients){%>
                 <option value=<%=col%>><%= col %></option>

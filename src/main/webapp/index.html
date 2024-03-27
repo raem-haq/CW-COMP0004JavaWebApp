@@ -8,7 +8,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0; /* Light grey background color */
+      background-color: #f0f0f0;
     }
 
     h2 {
@@ -18,7 +18,7 @@
     }
 
     nav {
-      text-align: center; /* Centering the navigation */
+      text-align: center;
     }
 
     nav ul {
@@ -33,7 +33,7 @@
     }
 
     nav ul li button {
-      background-color: #007bff; /* Blue background color */
+      background-color: #007bff;
       color: white;
       border: none;
       padding: 10px 20px;
@@ -44,12 +44,12 @@
     }
 
     nav ul li button:hover {
-      background-color: #0056b3; /* Darker blue background color on hover */
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-<div style="background-color: #ffffff; padding: 20px;"> <!-- White background color for the content -->
+<div style="background-color: #ffffff; padding: 20px;">
   <h2>Welcome to the Patient Data App</h2>
 
   <nav>
@@ -62,10 +62,13 @@
       </li>
 
       <li>
-        <button onclick="location.href='colnames.html'">Advanced Search</button>
+        <button onclick="location.href='colnames.html?nextpage=advancedSearch.jsp'">Advanced Search</button>
       </li>
       <li>
-        <button onclick="location.href='table.html'">Sort table</button>
+        <button onclick="location.href='table.html?nextpage=sorting.jsp'">Sort and view table</button>
+      </li>
+      <li>
+        <button onclick="location.href='editMenu.html'">Edit table</button>
       </li>
     </ul>
   </nav>
