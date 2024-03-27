@@ -17,7 +17,7 @@ public class Model
   // was getPatientNames
   public List<String> getPatientIDs()
   {
-    return dataFrame.getColumn("ID").getRows();
+    return dataFrame.getOrderedColumn("ID");
   }
 
   // find multiple keywords
@@ -49,7 +49,7 @@ public class Model
   }
 
   public List<List<String>> getTable() {
-    HashMap<String, List<String>> all = new HashMap<>(dataFrame.getAll());
+    HashMap<String, List<String>> all = new HashMap<>(dataFrame.getOrderedColumns());
     List<String> headers = new ArrayList<>(all.keySet());
     List<List<String>> table = new ArrayList<>();
     table.add(headers);

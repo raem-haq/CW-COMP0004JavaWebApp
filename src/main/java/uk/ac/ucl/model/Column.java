@@ -84,8 +84,4 @@ public class Column {
         return  newIndexMap;
     }
 
-    public void modify(Integer index, String newValue){
-        rows.set(index, newValue);
-    }
-
 }

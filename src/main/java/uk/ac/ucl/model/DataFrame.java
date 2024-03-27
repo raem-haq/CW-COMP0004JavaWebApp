@@ -1,9 +1,7 @@
 package uk.ac.ucl.model;
 
-import java.security.Key;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import  java.util.regex.Pattern;
 
@@ -24,9 +22,12 @@ public class DataFrame {
     public void addColumn(String name) {
         columns.put(name, new Column(name, new ArrayList<String>()));
     }
-
-    public Column getColumn(String name) {
-        return columns.get(name);
+    public List<String> getOrderedColumn(String name) {
+        List<String> col = new ArrayList<>();
+        for (int i = 0; i < getRowCount(); i++){
+            col.add(getValue(name, i));
+        }
+        return col;
     }
 
     public List<String> getColumnNames() {
@@ -52,7 +53,7 @@ public class DataFrame {
         int actualRowIndex = displayToActual.get(displayRowIndex);
         List<String> record = new ArrayList<>();
         for (String name : getColumnNames()){
-            record.add(getColumn(name).getRowValue(actualRowIndex));
+            record.add(columns.get(name).getRowValue(actualRowIndex));
         }
         return record;
     }
@@ -86,7 +87,7 @@ public class DataFrame {
     public List<List<String>> basicSearchFor(String searchString){
         List<List<String>> records = new ArrayList<>();
         for (String name: getColumnNames()){
-            List<Integer> indices = getColumn(name).findAllValueIndex(searchString);
+            List<Integer> indices = columns.get(name).findAllValueIndex(searchString);
             if (!indices.isEmpty()) {
                 for (int i : indices) {
                     records.add(getRecord(actualToDisplay.get(i)));
@@ -98,7 +99,7 @@ public class DataFrame {
 
     //searches for a keyword in a given field
     public List<List<String>> searchBy(String searchString, String field){
-        List<Integer> indices = getColumn(field).findAllValueIndex(searchString);
+        List<Integer> indices = columns.get(field).findAllValueIndex(searchString);
         List<List<String>> results = new ArrayList<>();
         for (int i : indices){
             results.add(getRecord(actualToDisplay.get(i)));
@@ -108,13 +109,13 @@ public class DataFrame {
 
     // ID is assumed to be the only unique value in the table.
     public List<String> searchID(String ID){
-        int unsortedIndex = getColumn("ID").findFirstValueIndex(ID);
+        int unsortedIndex = columns.get("ID").findFirstValueIndex(ID);
         return unsortedIndex == -1 ? new ArrayList<String>() : getRecord(actualToDisplay.get(unsortedIndex));
     }
 
     // sort the table by a field
     public void sortBy(String field, Boolean asc){
-        ArrayList<Integer> tempIndexList = new ArrayList<Integer>(getColumn(field).sort(asc));
+        ArrayList<Integer> tempIndexList = new ArrayList<Integer>(columns.get(field).sort(asc));
         for (int i = 0; i < tempIndexList.size(); i++){
             // as said above, we are not rearranging columns to a sorted order.
             // instead defining a map from the actual to sorted order.
@@ -124,10 +125,10 @@ public class DataFrame {
         checkIndexMap();
     }
 
-    public HashMap<String, List<String>> getAll(){
+    public HashMap<String, List<String>> getOrderedColumns(){
         HashMap<String, List<String>> all = new HashMap<>();
         for (String name : getColumnNames()){
-            all.put(name, getColumn(name).getAll());
+            all.put(name, getOrderedColumn(name));
         }
         return all;
     }
@@ -275,7 +276,7 @@ public class DataFrame {
 
         int realIndex = displayToActual.get(displayedIndex);
         for (String name : getColumnNames()){
-            columns.get(name).modify(realIndex, record.get(name));
+            putValue(name, realIndex, record.get(name));
         }
         return "Modified row";
     }
