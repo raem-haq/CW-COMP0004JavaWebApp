@@ -59,7 +59,8 @@
     <h1>Delete row</h1>
 
     <%
-        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");%> <!-- always contains column names -->
+        List<List<String>> patients = (List<List<String>>) request.getAttribute("result");
+    if (patients.size() > 1) {%> <!-- always contains column names -->
     <p>Which row do you want to delete?</p>
     <form method="POST" action="/rundeleterow.html">
         <select name="index">
@@ -92,6 +93,9 @@
         <%}%>
         </tbody>
     </table>
+    <%} else {%>
+    <h2>No data found</h2>
+    <%}%>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>
